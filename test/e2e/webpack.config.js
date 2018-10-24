@@ -1,4 +1,5 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { RetryChunkLoadPlugin } = require('../../src');
 
 module.exports = {
@@ -8,5 +9,5 @@ module.exports = {
     path: path.join(__dirname, 'dist')
   },
   mode: 'development',
-  plugins: [new RetryChunkLoadPlugin()]
+  plugins: [new HtmlWebpackPlugin(), new RetryChunkLoadPlugin()]
 };
