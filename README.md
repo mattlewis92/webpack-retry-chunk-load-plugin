@@ -21,6 +21,10 @@ plugins: [
 ];
 ```
 
+### angular cli
+
+To use this with the angular CLI you can use the fantastic [`angular-builders`](https://github.com/meltedspark/angular-builders) project to extend the built in webpack config
+
 ## License
 
 MIT
