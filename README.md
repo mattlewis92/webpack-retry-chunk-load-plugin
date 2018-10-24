@@ -1,5 +1,12 @@
 # webpack-retry-chunk-load-plugin
 
+[![Build Status](https://travis-ci.org/mattlewis92/webpack-retry-chunk-load-plugin.svg?branch=master)](https://travis-ci.org/mattlewis92/webpack-retry-chunk-load-plugin)
+[![codecov](https://codecov.io/gh/mattlewis92/webpack-retry-chunk-load-plugin/branch/master/graph/badge.svg)](https://codecov.io/gh/mattlewis92/webpack-retry-chunk-load-plugin)
+[![npm version](https://badge.fury.io/js/webpack-retry-chunk-load-plugin.svg)](http://badge.fury.io/js/webpack-retry-chunk-load-plugin)
+[![GitHub issues](https://img.shields.io/github/issues/mattlewis92/webpack-retry-chunk-load-plugin.svg)](https://github.com/mattlewis92/webpack-retry-chunk-load-plugin/issues)
+[![GitHub stars](https://img.shields.io/github/stars/mattlewis92/webpack-retry-chunk-load-plugin.svg)](https://github.com/mattlewis92/webpack-retry-chunk-load-plugin/stargazers)
+[![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mattlewis92/webpack-retry-chunk-load-plugin/master/LICENSE)
+
 A webpack plugin to retry loading of async chunks that failed to load
 
 <img width="827" alt="screenshot 2018-10-24 at 21 47 39" src="https://user-images.githubusercontent.com/6425649/47435175-9c4c0100-d7d6-11e8-8519-6f46088e649f.png">
