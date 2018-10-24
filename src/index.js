@@ -10,27 +10,28 @@ class RetryChunkLoadPlugin {
   apply(compiler) {
     compiler.hooks.compilation.tap(pluginName, compilation => {
       const { mainTemplate } = compilation;
-      // Adapted from https://github.com/webpack/webpack/blob/c74bee9cef6cd733ccf64037c3d3e010d4413082/lib/web/JsonpMainTemplatePlugin.js#L141-L203
-      mainTemplate.hooks.jsonpScript.tap(pluginName, () => {
-        const {
-          crossOriginLoading,
-          chunkLoadTimeout,
-          jsonpScriptType
-        } = mainTemplate.outputOptions;
+      if (mainTemplate.hooks.jsonpScript) {
+        // Adapted from https://github.com/webpack/webpack/blob/c74bee9cef6cd733ccf64037c3d3e010d4413082/lib/web/JsonpMainTemplatePlugin.js#L141-L203
+        mainTemplate.hooks.jsonpScript.tap(pluginName, () => {
+          const {
+            crossOriginLoading,
+            chunkLoadTimeout,
+            jsonpScriptType
+          } = mainTemplate.outputOptions;
 
-        const crossOriginScript = `
+          const crossOriginScript = `
           if (script.src.indexOf(window.location.origin + '/') !== 0) {
             script.crossOrigin = ${JSON.stringify(crossOriginLoading)};
           }
         `;
 
-        const cacheBust = this.options.cacheBust
-          ? `
+          const cacheBust = this.options.cacheBust
+            ? `
           (${this.options.cacheBust})();
         `
-          : '"cache-bust=true"';
+            : '"cache-bust=true"';
 
-        const script = `
+          const script = `
           function loadScript(src, retries) {
      
             var script = document.createElement('script');
@@ -82,11 +83,12 @@ class RetryChunkLoadPlugin {
           var script = loadScript(jsonpScriptSrc(chunkId), 1);
         `;
 
-        return prettier.format(script, {
-          singleQuote: true,
-          parser: 'babylon'
+          return prettier.format(script, {
+            singleQuote: true,
+            parser: 'babylon'
+          });
         });
-      });
+      }
     });
   }
 }
