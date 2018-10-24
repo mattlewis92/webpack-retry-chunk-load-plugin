@@ -1,6 +1,8 @@
 # webpack-retry-chunk-load-plugin
 
-A webpack plugin to retry loading of chunks that failed to load
+A webpack plugin to retry loading of async chunks that failed to load
+
+<img width="827" alt="screenshot 2018-10-24 at 21 47 39" src="https://user-images.githubusercontent.com/6425649/47435175-9c4c0100-d7d6-11e8-8519-6f46088e649f.png">
 
 ## Usage
 
