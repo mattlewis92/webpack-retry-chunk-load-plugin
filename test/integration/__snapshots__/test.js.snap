@@ -96,45 +96,59 @@ exports[`override the default jsonp script 1`] = `
 /******/
 /******/ 				// start chunk loading
 /******/ 				var head = document.getElementsByTagName('head')[0];
-/******/ 				var script = document.createElement('script');
-/******/ 				var onScriptComplete;
+/******/ 				function loadScript(src, retries) {
+/******/ 				  var script = document.createElement('script');
+/******/ 				  var onScriptComplete;
 /******/
-/******/ 				script.charset = 'utf-8';
-/******/ 				script.timeout = 120;
-/******/ 				if (__webpack_require__.nc) {
-/******/ 				  script.setAttribute('nonce', __webpack_require__.nc);
-/******/ 				}
-/******/ 				script.src = jsonpScriptSrc(chunkId);
-/******/
-/******/ 				onScriptComplete = function(event) {
-/******/ 				  // avoid mem leaks in IE.
-/******/ 				  script.onerror = script.onload = null;
-/******/ 				  clearTimeout(timeout);
-/******/ 				  var chunk = installedChunks[chunkId];
-/******/ 				  if (chunk !== 0) {
-/******/ 				    if (chunk) {
-/******/ 				      var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-/******/ 				      var realSrc = event && event.target && event.target.src;
-/******/ 				      var error = new Error(
-/******/ 				        'Loading chunk ' +
-/******/ 				          chunkId +
-/******/ 				          ' failed.\\\\n(' +
-/******/ 				          errorType +
-/******/ 				          ': ' +
-/******/ 				          realSrc +
-/******/ 				          ')'
-/******/ 				      );
-/******/ 				      error.type = errorType;
-/******/ 				      error.request = realSrc;
-/******/ 				      chunk[1](error);
-/******/ 				    }
-/******/ 				    installedChunks[chunkId] = undefined;
+/******/ 				  script.charset = 'utf-8';
+/******/ 				  script.timeout = 120;
+/******/ 				  if (__webpack_require__.nc) {
+/******/ 				    script.setAttribute('nonce', __webpack_require__.nc);
 /******/ 				  }
-/******/ 				};
-/******/ 				var timeout = setTimeout(function() {
-/******/ 				  onScriptComplete({ type: 'timeout', target: script });
-/******/ 				}, 120000);
-/******/ 				script.onerror = script.onload = onScriptComplete;
+/******/ 				  script.src = src;
+/******/
+/******/ 				  onScriptComplete = function(event) {
+/******/ 				    // avoid mem leaks in IE.
+/******/ 				    script.onerror = script.onload = null;
+/******/ 				    clearTimeout(timeout);
+/******/ 				    var chunk = installedChunks[chunkId];
+/******/ 				    if (chunk !== 0) {
+/******/ 				      if (chunk) {
+/******/ 				        if (retries === 0) {
+/******/ 				          var errorType =
+/******/ 				            event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 				          var realSrc = event && event.target && event.target.src;
+/******/ 				          var error = new Error(
+/******/ 				            'Loading chunk ' +
+/******/ 				              chunkId +
+/******/ 				              ' failed.\\\\n(' +
+/******/ 				              errorType +
+/******/ 				              ': ' +
+/******/ 				              realSrc +
+/******/ 				              ')'
+/******/ 				          );
+/******/ 				          error.type = errorType;
+/******/ 				          error.request = realSrc;
+/******/ 				          chunk[1](error);
+/******/ 				          installedChunks[chunkId] = undefined;
+/******/ 				        } else {
+/******/ 				          var cacheBust = 'cache-bust=true';
+/******/ 				          var retryScript = loadScript(src + '?' + cacheBust, 0);
+/******/ 				          head.appendChild(retryScript);
+/******/ 				        }
+/******/ 				      } else {
+/******/ 				        installedChunks[chunkId] = undefined;
+/******/ 				      }
+/******/ 				    }
+/******/ 				  };
+/******/ 				  var timeout = setTimeout(function() {
+/******/ 				    onScriptComplete({ type: 'timeout', target: script });
+/******/ 				  }, 120000);
+/******/ 				  script.onerror = script.onload = onScriptComplete;
+/******/ 				  return script;
+/******/ 				}
+/******/
+/******/ 				var script = loadScript(jsonpScriptSrc(chunkId), 1);
 /******/ 				head.appendChild(script);
 /******/ 			}
 /******/ 		}
@@ -218,10 +232,11 @@ exports[`override the default jsonp script 1`] = `
 /***/ (function(module, exports, __webpack_require__) {
 
 async function run() {
-    console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
+  console.log(await __webpack_require__.e(/*! import() */ 0).then(__webpack_require__.bind(null, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
 }
 
 run();
+
 
 /***/ })
 
