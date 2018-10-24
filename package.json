@@ -1,0 +1,66 @@
+{
+  "name": "webpack-retry-chunk-load-plugin",
+  "version": "1.0.0",
+  "description": "A webpack plugin to retry loading of chunks that failed to load",
+  "main": "src/index.js",
+  "directories": {
+    "test": "test"
+  },
+  "peerDependencies": {
+    "webpack": ">=4.0.0"
+  },
+  "devDependencies": {
+    "codecov": "^3.1.0",
+    "express": "^4.16.4",
+    "husky": "^1.1.2",
+    "jest": "^23.6.0",
+    "memory-fs": "^0.4.1",
+    "nodemon": "^1.18.4",
+    "pretty-quick": "^1.8.0",
+    "webpack": "^4.22.0",
+    "webpack-cli": "^3.1.2",
+    "xo": "^0.23.0"
+  },
+  "scripts": {
+    "lint": "xo --fix",
+    "test": "npm run lint && jest",
+    "test:watch": "npm t -- --watch",
+    "test:ci": "npm t -- --runInBand --coverage",
+    "codecov": "cat coverage/lcov.info | codecov",
+    "test:e2e": "webpack --config test/e2e/webpack.config.js && nodemon test/e2e/server.js",
+    "ci": "npm run lint && npm run test:ci"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mattlewis92/webpack-retry-chunk-load-plugin.git"
+  },
+  "keywords": [
+    "webpack",
+    "webpack plugin"
+  ],
+  "author": "Matt Lewis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mattlewis92/webpack-retry-chunk-load-plugin/issues"
+  },
+  "homepage": "https://github.com/mattlewis92/webpack-retry-chunk-load-plugin#readme",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
+  "dependencies": {
+    "prettier": "^1.14.3"
+  },
+  "xo": {
+    "prettier": true,
+    "space": true,
+    "envs": [
+      "node",
+      "jest"
+    ],
+    "ignores": [
+      "test/integration/fixtures/index.js"
+    ]
+  }
+}

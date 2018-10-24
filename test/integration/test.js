@@ -1,0 +1,11 @@
+const path = require('path');
+const webpack = require('./utils/webpack');
+
+const mainOutputFile = path.join(__dirname, 'fixtures', 'dist', 'main.js');
+
+test('override the default jsonp script', async () => {
+  const { result, fs } = webpack();
+  await result;
+  const mainContents = fs.readFileSync(mainOutputFile).toString();
+  expect(mainContents).toMatchSnapshot();
+});

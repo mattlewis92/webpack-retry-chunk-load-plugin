@@ -1,0 +1,4 @@
+node_modules
+coverage
+.idea
+test/e2e/dist
