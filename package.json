@@ -62,5 +62,8 @@
     "ignores": [
       "test/integration/fixtures/index.js"
     ]
-  }
+  },
+  "files": [
+    "src"
+  ]
 }
