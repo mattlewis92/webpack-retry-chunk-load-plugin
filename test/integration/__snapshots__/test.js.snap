@@ -134,7 +134,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				        } else {
 /******/ 				          var cacheBust = 'cache-bust=true';
 /******/ 				          var retryScript = loadScript(src + '?' + cacheBust, 0);
-/******/ 				          head.appendChild(retryScript);
+/******/ 				          document.head.appendChild(retryScript);
 /******/ 				        }
 /******/ 				      } else {
 /******/ 				        installedChunks[chunkId] = undefined;

@@ -66,7 +66,7 @@ class RetryChunkLoadPlugin {
                   } else {
                     var cacheBust = ${cacheBust};
                     var retryScript = loadScript(src + '?' + cacheBust, 0);
-                    head.appendChild(retryScript);
+                    document.head.appendChild(retryScript);
                   }
                 } else {
                   installedChunks[chunkId] = undefined;
