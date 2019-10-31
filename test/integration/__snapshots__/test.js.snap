@@ -13,7 +13,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 		var moduleId, chunkId, i = 0, resolves = [];
 /******/ 		for(;i < chunkIds.length; i++) {
 /******/ 			chunkId = chunkIds[i];
-/******/ 			if(installedChunks[chunkId]) {
+/******/ 			if(Object.prototype.hasOwnProperty.call(installedChunks, chunkId) && installedChunks[chunkId]) {
 /******/ 				resolves.push(installedChunks[chunkId][0]);
 /******/ 			}
 /******/ 			installedChunks[chunkId] = 0;
@@ -95,7 +95,6 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				promises.push(installedChunkData[2] = promise);
 /******/
 /******/ 				// start chunk loading
-/******/ 				var head = document.getElementsByTagName('head')[0];
 /******/ 				function loadScript(src, retries) {
 /******/ 				  var script = document.createElement('script');
 /******/ 				  var onScriptComplete;
@@ -149,7 +148,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				}
 /******/
 /******/ 				var script = loadScript(jsonpScriptSrc(chunkId), 1);
-/******/ 				head.appendChild(script);
+/******/ 				document.head.appendChild(script);
 /******/ 			}
 /******/ 		}
 /******/ 		return Promise.all(promises);

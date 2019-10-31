@@ -24,6 +24,7 @@ module.exports = function({ fixture = 'index.js', extend = {} } = {}) {
       if (err) {
         return reject(err);
       }
+
       return resolve(stats);
     });
   });
