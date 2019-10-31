@@ -85,7 +85,7 @@ class RetryChunkLoadPlugin {
 
           return prettier.format(script, {
             singleQuote: true,
-            parser: 'babylon'
+            parser: 'babel'
           });
         });
       }
