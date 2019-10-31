@@ -1,6 +1,6 @@
 {
   "name": "webpack-retry-chunk-load-plugin",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A webpack plugin to retry loading of chunks that failed to load",
   "main": "src/index.js",
   "directories": {
