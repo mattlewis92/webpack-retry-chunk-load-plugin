@@ -11,7 +11,7 @@ class RetryChunkLoadPlugin {
     compiler.hooks.compilation.tap(pluginName, compilation => {
       const { mainTemplate } = compilation;
       if (mainTemplate.hooks.jsonpScript) {
-        // Adapted from https://github.com/webpack/webpack/blob/c74bee9cef6cd733ccf64037c3d3e010d4413082/lib/web/JsonpMainTemplatePlugin.js#L141-L203
+        // Adapted from https://github.com/webpack/webpack/blob/11e94dd2d0a8d8baae75e715ff8a69f27a9e3014/lib/web/JsonpMainTemplatePlugin.js#L145-L210
         mainTemplate.hooks.jsonpScript.tap(pluginName, () => {
           const {
             crossOriginLoading,
@@ -32,6 +32,8 @@ class RetryChunkLoadPlugin {
             : '"cache-bust=true"';
 
           const script = `
+          // create error before stack unwound to get useful stacktrace later
+          var error = new Error();
           function loadScript(src, retries) {
      
             var script = document.createElement('script');
@@ -58,7 +60,7 @@ class RetryChunkLoadPlugin {
                   if (retries === 0) {
                     var errorType = event && (event.type === 'load' ? 'missing' : event.type);
                     var realSrc = event && event.target && event.target.src;
-                    var error = new Error('Loading chunk ' + chunkId + ' failed.\\n(' + errorType + ': ' + realSrc + ')');
+                    error.message = 'Loading chunk ' + chunkId + ' failed.\\n(' + errorType + ': ' + realSrc + ')';
                     error.type = errorType;
                     error.request = realSrc;
                     chunk[1](error);

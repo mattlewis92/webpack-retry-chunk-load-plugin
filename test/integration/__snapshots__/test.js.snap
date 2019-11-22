@@ -95,6 +95,8 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				promises.push(installedChunkData[2] = promise);
 /******/
 /******/ 				// start chunk loading
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
 /******/ 				function loadScript(src, retries) {
 /******/ 				  var script = document.createElement('script');
 /******/ 				  var onScriptComplete;
@@ -117,15 +119,14 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				          var errorType =
 /******/ 				            event && (event.type === 'load' ? 'missing' : event.type);
 /******/ 				          var realSrc = event && event.target && event.target.src;
-/******/ 				          var error = new Error(
+/******/ 				          error.message =
 /******/ 				            'Loading chunk ' +
-/******/ 				              chunkId +
-/******/ 				              ' failed.\\\\n(' +
-/******/ 				              errorType +
-/******/ 				              ': ' +
-/******/ 				              realSrc +
-/******/ 				              ')'
-/******/ 				          );
+/******/ 				            chunkId +
+/******/ 				            ' failed.\\\\n(' +
+/******/ 				            errorType +
+/******/ 				            ': ' +
+/******/ 				            realSrc +
+/******/ 				            ')';
 /******/ 				          error.type = errorType;
 /******/ 				          error.request = realSrc;
 /******/ 				          chunk[1](error);
