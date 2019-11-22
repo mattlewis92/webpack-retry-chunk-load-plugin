@@ -127,6 +127,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				            ': ' +
 /******/ 				            realSrc +
 /******/ 				            ')';
+/******/ 				          error.name = 'ChunkLoadError';
 /******/ 				          error.type = errorType;
 /******/ 				          error.request = realSrc;
 /******/ 				          chunk[1](error);
