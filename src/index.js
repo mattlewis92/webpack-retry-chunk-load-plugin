@@ -88,7 +88,7 @@ class RetryChunkLoadPlugin {
             return script;
           }
           
-          var script = loadScript(jsonpScriptSrc(chunkId), maxRetries);
+          var script = loadScript(jsonpScriptSrc(chunkId), ${maxRetries});
         `;
 
           return prettier.format(script, {
