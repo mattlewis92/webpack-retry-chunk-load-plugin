@@ -23,7 +23,9 @@ plugins: [
     // if not set will default to appending the string `?cache-bust=true`
     cacheBust: `function() {
       return Date.now();
-    }`
+    }`,
+    // optional value to set the maximum number of retries to load the chunk. Default is 1
+    maxRetries: 5
   })
 ];
 ```

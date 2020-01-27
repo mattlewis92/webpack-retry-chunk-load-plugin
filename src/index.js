@@ -25,17 +25,22 @@ class RetryChunkLoadPlugin {
           }
         `;
 
-          const cacheBust = this.options.cacheBust
-            ? `
-          (${this.options.cacheBust})();
-        `
-            : '"cache-bust=true"';
+          const getCacheBustString = () =>
+            this.options.cacheBust
+              ? `
+            (${this.options.cacheBust})();
+          `
+              : '"cache-bust=true"';
+
+          const maxRetries = Number.isInteger(Number(this.options.maxRetries))
+            ? Number(this.options.maxRetries)
+            : 1;
 
           const script = `
           // create error before stack unwound to get useful stacktrace later
           var error = new Error();
           function loadScript(src, retries) {
-     
+
             var script = document.createElement('script');
             var onScriptComplete;
             ${
@@ -67,7 +72,7 @@ class RetryChunkLoadPlugin {
                     chunk[1](error);
                     installedChunks[chunkId] = undefined;
                   } else {
-                    var cacheBust = ${cacheBust};
+                    var cacheBust = ${getCacheBustString()};
                     var retryScript = loadScript(src + '?' + cacheBust, 0);
                     document.head.appendChild(retryScript);
                   }
@@ -83,7 +88,7 @@ class RetryChunkLoadPlugin {
             return script;
           }
           
-          var script = loadScript(jsonpScriptSrc(chunkId), 1);
+          var script = loadScript(jsonpScriptSrc(chunkId), maxRetries);
         `;
 
           return prettier.format(script, {
