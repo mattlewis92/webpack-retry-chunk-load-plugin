@@ -73,7 +73,7 @@ class RetryChunkLoadPlugin {
                     installedChunks[chunkId] = undefined;
                   } else {
                     var cacheBust = ${getCacheBustString()};
-                    var retryScript = loadScript(src + '?' + cacheBust, (retries-1));
+                    var retryScript = loadScript(jsonpScriptSrc(chunkId) + '?' + cacheBust, (retries-1));
                     document.head.appendChild(retryScript);
                   }
                 } else {
