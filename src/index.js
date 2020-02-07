@@ -45,6 +45,8 @@ class RetryChunkLoadPlugin {
           function loadScript(src, retries) {
 
             var script = document.createElement('script');
+            var retryAttempt = ${maxRetries} - retries + 1;
+            var retryAttemptString = '&retryAttempt=' + retryAttempt;
             var onScriptComplete;
             ${
               jsonpScriptType
@@ -75,7 +77,7 @@ class RetryChunkLoadPlugin {
                     chunk[1](error);
                     installedChunks[chunkId] = undefined;
                   } else {
-                    var cacheBust = ${getCacheBustString()};
+                    var cacheBust = ${getCacheBustString()} + retryAttemptString;
                     var retryScript = loadScript(jsonpScriptSrc(chunkId) + '?' + cacheBust, (retries-1));
                     document.head.appendChild(retryScript);
                   }
