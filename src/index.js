@@ -32,9 +32,12 @@ class RetryChunkLoadPlugin {
           `
               : '"cache-bust=true"';
 
-          const maxRetries = Number.isInteger(Number(this.options.maxRetries))
-            ? Number(this.options.maxRetries)
-            : 1;
+          const maxRetryValueFromOptions = Number(this.options.maxRetries);
+          const maxRetries =
+            Number.isInteger(maxRetryValueFromOptions) &&
+            maxRetryValueFromOptions > 0
+              ? maxRetryValueFromOptions
+              : 1;
 
           const script = `
           // create error before stack unwound to get useful stacktrace later
