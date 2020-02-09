@@ -10,15 +10,15 @@
     "webpack": ">=4.0.0"
   },
   "devDependencies": {
-    "codecov": "^3.6.1",
+    "codecov": "^3.6.5",
     "express": "^4.17.1",
     "html-webpack-plugin": "^3.2.0",
-    "husky": "^3.0.9",
-    "jest": "^24.9.0",
+    "husky": "^4.2.1",
+    "jest": "^25.1.0",
     "memory-fs": "^0.5.0",
-    "nodemon": "^1.19.4",
-    "pretty-quick": "^2.0.0",
-    "webpack": "^4.41.2",
+    "nodemon": "^2.0.2",
+    "pretty-quick": "^2.0.1",
+    "webpack": "^4.41.5",
     "webpack-cli": "^3.3.10",
     "xo": "^0.25.3"
   },
@@ -51,7 +51,7 @@
     }
   },
   "dependencies": {
-    "prettier": "^1.14.3"
+    "prettier": "^1.19.1"
   },
   "xo": {
     "prettier": true,
