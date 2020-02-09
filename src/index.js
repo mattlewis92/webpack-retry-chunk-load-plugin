@@ -25,18 +25,28 @@ class RetryChunkLoadPlugin {
           }
         `;
 
-          const cacheBust = this.options.cacheBust
-            ? `
-          (${this.options.cacheBust})();
-        `
-            : '"cache-bust=true"';
+          const getCacheBustString = () =>
+            this.options.cacheBust
+              ? `
+            (${this.options.cacheBust})();
+          `
+              : '"cache-bust=true"';
+
+          const maxRetryValueFromOptions = Number(this.options.maxRetries);
+          const maxRetries =
+            Number.isInteger(maxRetryValueFromOptions) &&
+            maxRetryValueFromOptions > 0
+              ? maxRetryValueFromOptions
+              : 1;
 
           const script = `
           // create error before stack unwound to get useful stacktrace later
           var error = new Error();
           function loadScript(src, retries) {
-     
+
             var script = document.createElement('script');
+            var retryAttempt = ${maxRetries} - retries + 1;
+            var retryAttemptString = '&retryAttempt=' + retryAttempt;
             var onScriptComplete;
             ${
               jsonpScriptType
@@ -67,8 +77,8 @@ class RetryChunkLoadPlugin {
                     chunk[1](error);
                     installedChunks[chunkId] = undefined;
                   } else {
-                    var cacheBust = ${cacheBust};
-                    var retryScript = loadScript(src + '?' + cacheBust, 0);
+                    var cacheBust = ${getCacheBustString()} + retryAttemptString;
+                    var retryScript = loadScript(jsonpScriptSrc(chunkId) + '?' + cacheBust, (retries-1));
                     document.head.appendChild(retryScript);
                   }
                 } else {
@@ -83,7 +93,7 @@ class RetryChunkLoadPlugin {
             return script;
           }
           
-          var script = loadScript(jsonpScriptSrc(chunkId), 1);
+          var script = loadScript(jsonpScriptSrc(chunkId), ${maxRetries});
         `;
 
           return prettier.format(script, {

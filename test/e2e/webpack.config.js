@@ -9,5 +9,10 @@ module.exports = {
     path: path.join(__dirname, 'dist')
   },
   mode: 'development',
-  plugins: [new HtmlWebpackPlugin(), new RetryChunkLoadPlugin()]
+  plugins: [
+    new HtmlWebpackPlugin(),
+    new RetryChunkLoadPlugin({
+      maxRetries: 5
+    })
+  ]
 };

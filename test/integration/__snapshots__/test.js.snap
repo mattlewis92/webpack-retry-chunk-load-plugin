@@ -99,6 +99,8 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				var error = new Error();
 /******/ 				function loadScript(src, retries) {
 /******/ 				  var script = document.createElement('script');
+/******/ 				  var retryAttempt = 1 - retries + 1;
+/******/ 				  var retryAttemptString = '&retryAttempt=' + retryAttempt;
 /******/ 				  var onScriptComplete;
 /******/
 /******/ 				  script.charset = 'utf-8';
@@ -133,8 +135,11 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				          chunk[1](error);
 /******/ 				          installedChunks[chunkId] = undefined;
 /******/ 				        } else {
-/******/ 				          var cacheBust = 'cache-bust=true';
-/******/ 				          var retryScript = loadScript(src + '?' + cacheBust, 0);
+/******/ 				          var cacheBust = 'cache-bust=true' + retryAttemptString;
+/******/ 				          var retryScript = loadScript(
+/******/ 				            jsonpScriptSrc(chunkId) + '?' + cacheBust,
+/******/ 				            retries - 1
+/******/ 				          );
 /******/ 				          document.head.appendChild(retryScript);
 /******/ 				        }
 /******/ 				      } else {
