@@ -46,7 +46,7 @@ class RetryChunkLoadPlugin {
 
             var script = document.createElement('script');
             var retryAttempt = ${maxRetries} - retries + 1;
-            var retryAttemptString = '&retryAttempt=' + retryAttempt;
+            var retryAttemptString = '&retry-attempt=' + retryAttempt;
             var onScriptComplete;
             ${
               jsonpScriptType
@@ -92,7 +92,7 @@ class RetryChunkLoadPlugin {
             script.onerror = script.onload = onScriptComplete;
             return script;
           }
-          
+
           var script = loadScript(jsonpScriptSrc(chunkId), ${maxRetries});
         `;
 

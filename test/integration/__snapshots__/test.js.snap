@@ -100,7 +100,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				function loadScript(src, retries) {
 /******/ 				  var script = document.createElement('script');
 /******/ 				  var retryAttempt = 1 - retries + 1;
-/******/ 				  var retryAttemptString = '&retryAttempt=' + retryAttempt;
+/******/ 				  var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 				  var onScriptComplete;
 /******/
 /******/ 				  script.charset = 'utf-8';

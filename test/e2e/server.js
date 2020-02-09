@@ -5,7 +5,10 @@ const app = express();
 const port = 3000;
 
 app.get('/0.js', (req, res, next) => {
-  if (req.query['cache-bust'] === 'true' && req.query.retryAttempt === '5') {
+  if (
+    req.query['cache-bust'] === 'true' &&
+    req.query['retry-attempt'] === '5'
+  ) {
     next();
   } else {
     res.status(500).send('fail');
