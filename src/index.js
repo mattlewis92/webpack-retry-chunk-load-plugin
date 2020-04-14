@@ -12,7 +12,7 @@ class RetryChunkLoadPlugin {
       const { mainTemplate } = compilation;
       if (mainTemplate.hooks.jsonpScript) {
         // Adapted from https://github.com/webpack/webpack/blob/11e94dd2d0a8d8baae75e715ff8a69f27a9e3014/lib/web/JsonpMainTemplatePlugin.js#L145-L210
-        mainTemplate.hooks.jsonpScript.tap(pluginName, (_, chunk) => {
+        mainTemplate.hooks.jsonpScript.tap(pluginName, (source, chunk) => {
           const {
             crossOriginLoading,
             chunkLoadTimeout,
@@ -96,50 +96,11 @@ class RetryChunkLoadPlugin {
           var script = loadScript(jsonpScriptSrc(chunkId), ${maxRetries});
         `;
 
-          const scriptWithoutRetry = `
-          var script = document.createElement('script');
-          var onScriptComplete;
-          ${
-            jsonpScriptType
-              ? `script.type = ${JSON.stringify(jsonpScriptType)};`
-              : ''
-          }
-          script.charset = 'utf-8';
-          script.timeout = ${chunkLoadTimeout / 1000};
-          if (${mainTemplate.requireFn}.nc) {
-            script.setAttribute("nonce", ${mainTemplate.requireFn}.nc);
-          }
-          script.src = jsonpScriptSrc(chunkId);
-          ${crossOriginLoading ? crossOriginScript : ''}
-          onScriptComplete = function (event) {
-            // avoid mem leaks in IE.
-            script.onerror = script.onload = null;
-            clearTimeout(timeout);
-            var chunk = installedChunks[chunkId];
-            if (chunk !== 0) {
-              if (chunk) {
-                var errorType = event && (event.type === 'load' ? 'missing' : event.type);
-                var realSrc = event && event.target && event.target.src;
-                error.message = 'Loading chunk ' + chunkId + ' failed.\\n(' + errorType + ': ' + realSrc + ')';
-                error.name = 'ChunkLoadError';
-                error.type = errorType;
-                error.request = realSrc;
-                chunk[1](error);
-              }
-              installedChunks[chunkId] = undefined;
-            }
-          };
-          var timeout = setTimeout(function(){
-            onScriptComplete({ type: 'timeout', target: script });
-          }, ${chunkLoadTimeout});
-          script.onerror = script.onload = onScriptComplete;
-        `;
-
           const currentChunkName = chunk.name;
           const addRetryCode =
             !this.options.chunks ||
             this.options.chunks.includes(currentChunkName);
-          const script = addRetryCode ? scriptWithRetry : scriptWithoutRetry;
+          const script = addRetryCode ? scriptWithRetry : source;
 
           return prettier.format(script, {
             singleQuote: true,

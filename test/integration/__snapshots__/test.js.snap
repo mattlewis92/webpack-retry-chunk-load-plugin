@@ -354,6 +354,8 @@ exports[`override the default jsonp script without retry 1`] = `
 /******/ 				}
 /******/ 				script.src = jsonpScriptSrc(chunkId);
 /******/
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
 /******/ 				onScriptComplete = function(event) {
 /******/ 				  // avoid mem leaks in IE.
 /******/ 				  script.onerror = script.onload = null;
