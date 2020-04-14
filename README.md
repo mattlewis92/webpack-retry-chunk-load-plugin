@@ -25,7 +25,10 @@ plugins: [
       return Date.now();
     }`,
     // optional value to set the maximum number of retries to load the chunk. Default is 1
-    maxRetries: 5
+    maxRetries: 5,
+    // optional list of chunks to which retry script should be injected
+    // if not set will add retry script to all chunks that have webpack script loading
+    chunks: ['chunkName']
   })
 ];
 ```
