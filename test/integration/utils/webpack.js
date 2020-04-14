@@ -3,7 +3,10 @@ const webpack = require('webpack');
 const MemoryFileSystem = require('memory-fs');
 const { RetryChunkLoadPlugin } = require('../../../src');
 
-module.exports = function({ fixture = 'index.js', extend = {} } = {}) {
+module.exports = function(
+  pluginOptions = {},
+  { fixture = 'index.js', extend = {} } = {}
+) {
   const config = {
     mode: 'development',
     devtool: false,
@@ -11,7 +14,7 @@ module.exports = function({ fixture = 'index.js', extend = {} } = {}) {
     output: {
       path: path.join(__dirname, '..', 'fixtures', 'dist')
     },
-    plugins: [new RetryChunkLoadPlugin()],
+    plugins: [new RetryChunkLoadPlugin(pluginOptions)],
     ...extend
   };
 
