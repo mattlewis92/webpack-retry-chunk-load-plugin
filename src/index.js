@@ -70,7 +70,7 @@ class RetryChunkLoadPlugin {
                   if (retries === 0) {
                     var errorType = event && (event.type === 'load' ? 'missing' : event.type);
                     var realSrc = event && event.target && event.target.src;
-                    error.message = 'Loading chunk ' + chunkId + ' failed.\\n(' + errorType + ': ' + realSrc + ')';
+                    error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + errorType + ': ' + realSrc + ')';
                     error.name = 'ChunkLoadError';
                     error.type = errorType;
                     error.request = realSrc;

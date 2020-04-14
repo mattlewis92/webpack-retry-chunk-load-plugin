@@ -124,7 +124,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				          error.message =
 /******/ 				            'Loading chunk ' +
 /******/ 				            chunkId +
-/******/ 				            ' failed.\\\\n(' +
+/******/ 				            ' failed after 1 retries.\\\\n(' +
 /******/ 				            errorType +
 /******/ 				            ': ' +
 /******/ 				            realSrc +
