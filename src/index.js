@@ -12,7 +12,7 @@ class RetryChunkLoadPlugin {
       const { mainTemplate } = compilation;
       if (mainTemplate.hooks.jsonpScript) {
         // Adapted from https://github.com/webpack/webpack/blob/11e94dd2d0a8d8baae75e715ff8a69f27a9e3014/lib/web/JsonpMainTemplatePlugin.js#L145-L210
-        mainTemplate.hooks.jsonpScript.tap(pluginName, () => {
+        mainTemplate.hooks.jsonpScript.tap(pluginName, (source, chunk) => {
           const {
             crossOriginLoading,
             chunkLoadTimeout,
@@ -39,7 +39,7 @@ class RetryChunkLoadPlugin {
               ? maxRetryValueFromOptions
               : 1;
 
-          const script = `
+          const scriptWithRetry = `
           // create error before stack unwound to get useful stacktrace later
           var error = new Error();
           function loadScript(src, retries) {
@@ -70,7 +70,7 @@ class RetryChunkLoadPlugin {
                   if (retries === 0) {
                     var errorType = event && (event.type === 'load' ? 'missing' : event.type);
                     var realSrc = event && event.target && event.target.src;
-                    error.message = 'Loading chunk ' + chunkId + ' failed.\\n(' + errorType + ': ' + realSrc + ')';
+                    error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + errorType + ': ' + realSrc + ')';
                     error.name = 'ChunkLoadError';
                     error.type = errorType;
                     error.request = realSrc;
@@ -95,6 +95,12 @@ class RetryChunkLoadPlugin {
 
           var script = loadScript(jsonpScriptSrc(chunkId), ${maxRetries});
         `;
+
+          const currentChunkName = chunk.name;
+          const addRetryCode =
+            !this.options.chunks ||
+            this.options.chunks.includes(currentChunkName);
+          const script = addRetryCode ? scriptWithRetry : source;
 
           return prettier.format(script, {
             singleQuote: true,

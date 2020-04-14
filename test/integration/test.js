@@ -9,3 +9,10 @@ test('override the default jsonp script', async () => {
   const mainContents = fs.readFileSync(mainOutputFile).toString();
   expect(mainContents).toMatchSnapshot();
 });
+
+test('override the default jsonp script without retry', async () => {
+  const { result, fs } = webpack({ chunks: [] });
+  await result;
+  const mainContents = fs.readFileSync(mainOutputFile).toString();
+  expect(mainContents).toMatchSnapshot();
+});
