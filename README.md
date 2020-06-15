@@ -28,7 +28,10 @@ plugins: [
     maxRetries: 5,
     // optional list of chunks to which retry script should be injected
     // if not set will add retry script to all chunks that have webpack script loading
-    chunks: ['chunkName']
+    chunks: ['chunkName'],
+    // optional code to be executed in the browser context if after all retries chunk is not loaded.
+    // if not set - nothing will happen and error will be returned to the chunk loader.
+    lastResortScript: "window.location.href='/500.html'";
   })
 ];
 ```
