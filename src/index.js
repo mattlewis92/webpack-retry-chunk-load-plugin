@@ -73,7 +73,11 @@ class RetryChunkLoadPlugin {
                     error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + errorType + ': ' + realSrc + ')';
                     error.name = 'ChunkLoadError';
                     error.type = errorType;
-                    error.request = realSrc;
+                    error.request = realSrc;${
+                      this.options.lastResortScript
+                        ? this.options.lastResortScript
+                        : ''
+                    }
                     chunk[1](error);
                     installedChunks[chunkId] = undefined;
                   } else {
