@@ -165,13 +165,13 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
 /******/ 	var maxRetries = 1;
-/******/ 	__webpack_require__.u = function(chunkId) {
+/******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
 /******/ 	};
-/******/ 	__webpack_require__.e = function(chunkId) {
+/******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
-/******/ 	  return result.catch(function(error) {
+/******/ 	  return result.catch(function (error) {
 /******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
@@ -468,13 +468,13 @@ exports[`override the default jsonp script 1`] = `
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
 /******/ 	var maxRetries = 1;
-/******/ 	__webpack_require__.u = function(chunkId) {
+/******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
 /******/ 	};
-/******/ 	__webpack_require__.e = function(chunkId) {
+/******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
-/******/ 	  return result.catch(function(error) {
+/******/ 	  return result.catch(function (error) {
 /******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
@@ -770,13 +770,13 @@ exports[`override the default jsonp script without retry 1`] = `
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
 /******/ 	var maxRetries = 1;
-/******/ 	__webpack_require__.u = function(chunkId) {
+/******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
 /******/ 	};
-/******/ 	__webpack_require__.e = function(chunkId) {
+/******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
-/******/ 	  return result.catch(function(error) {
+/******/ 	  return result.catch(function (error) {
 /******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
@@ -1072,13 +1072,13 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
 /******/ 	var maxRetries = 1;
-/******/ 	__webpack_require__.u = function(chunkId) {
+/******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
 /******/ 	};
-/******/ 	__webpack_require__.e = function(chunkId) {
+/******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
-/******/ 	  return result.catch(function(error) {
+/******/ 	  return result.catch(function (error) {
 /******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);

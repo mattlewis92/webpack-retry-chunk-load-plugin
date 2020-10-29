@@ -27,7 +27,7 @@ test('retry loading the main chunk', async () => {
 test('inserts last resort script into the code handling failure after all retries', async () => {
   const { result, fs } = webpack({
     chunks: ['main'],
-    lastResortScript: "window.location.href='/500.html'"
+    lastResortScript: "window.location.href='/500.html'",
   });
   await result;
   const mainContents = fs.readFileSync(mainOutputFile).toString();
