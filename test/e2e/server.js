@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/0.js', (req, res, next) => {
+app.get('/test_integration_fixtures_async_js.js', (req, res, next) => {
   if (
     req.query['cache-bust'] === 'true' &&
     req.query['retry-attempt'] === '5'
