@@ -6,13 +6,13 @@ module.exports = {
   devtool: false,
   entry: path.join(__dirname, '..', 'integration', 'fixtures', 'index.js'),
   output: {
-    path: path.join(__dirname, 'dist')
+    path: path.join(__dirname, 'dist'),
   },
   mode: 'development',
   plugins: [
     new HtmlWebpackPlugin(),
     new RetryChunkLoadPlugin({
-      maxRetries: 5
-    })
-  ]
+      maxRetries: 5,
+    }),
+  ],
 };
