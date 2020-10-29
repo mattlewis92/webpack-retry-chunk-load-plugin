@@ -4,14 +4,14 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-app.get('/test_integration_fixtures_async_js.js', (req, res, next) => {
+app.get('/test_integration_fixtures_async_js.js', (request, response, next) => {
   if (
-    req.query['cache-bust'] === 'true' &&
-    req.query['retry-attempt'] === '5'
+    request.query['cache-bust'] === 'true' &&
+    request.query['retry-attempt'] === '5'
   ) {
     next();
   } else {
-    res.status(500).send('fail');
+    response.status(500).send('fail');
   }
 });
 

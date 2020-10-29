@@ -9,7 +9,7 @@ class RetryChunkLoadPlugin {
   }
 
   apply(compiler) {
-    compiler.hooks.thisCompilation.tap(pluginName, compilation => {
+    compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
       const { mainTemplate } = compilation;
       const maxRetryValueFromOptions = Number(this.options.maxRetries);
       const maxRetries =
@@ -25,7 +25,7 @@ class RetryChunkLoadPlugin {
           : '"cache-bust=true"';
       mainTemplate.hooks.localVars.tap(
         { name: pluginName, stage: 1 },
-        source => {
+        (source) => {
           const script = `
           var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
           var oldLoadScript = ${RuntimeGlobals.ensureChunk};
@@ -63,7 +63,7 @@ class RetryChunkLoadPlugin {
             source +
             prettier.format(script, {
               singleQuote: true,
-              parser: 'babel'
+              parser: 'babel',
             })
           );
         }
