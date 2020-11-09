@@ -36,6 +36,13 @@ plugins: [
 ];
 ```
 
+### Webpack compatibility
+
+| Webpack version  | webpack-retry-chunk-load-plugin version                                |
+| --------------   | ---------------------------------------------------------------------- |
+| 5.x              | 2.x |
+| 4.x              | 1.x |
+
 ### angular cli
 
 To use this with the angular CLI you can use the fantastic [`angular-builders`](https://github.com/meltedspark/angular-builders) project to extend the built in webpack config
