@@ -257,7 +257,7 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 		// no deferred startup
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add \\"moreModules\\" to the modules object,
 /******/ 			// then flag all \\"chunkIds\\" as loaded and fire callback
@@ -275,7 +275,7 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 				}
 /******/ 			}
 /******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			parentChunkLoadingFunction(data);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			while(resolves.length) {
 /******/ 				resolves.shift()();
 /******/ 			}
@@ -283,16 +283,16 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] || [];
-/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 		
+/******/ 		// no deferred startup
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 /*!********************************************!*\\\\
   !*** ./test/integration/fixtures/index.js ***!
   \\\\********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__.e, __webpack_require__, __webpack_require__.* */
 async function run() {
   console.log(await __webpack_require__.e(/*! import() */ \\"test_integration_fixtures_async_js\\").then(__webpack_require__.bind(__webpack_require__, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
 }
@@ -559,7 +559,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 		// no deferred startup
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add \\"moreModules\\" to the modules object,
 /******/ 			// then flag all \\"chunkIds\\" as loaded and fire callback
@@ -577,7 +577,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 				}
 /******/ 			}
 /******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			parentChunkLoadingFunction(data);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			while(resolves.length) {
 /******/ 				resolves.shift()();
 /******/ 			}
@@ -585,16 +585,16 @@ exports[`override the default jsonp script 1`] = `
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] || [];
-/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 		
+/******/ 		// no deferred startup
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 /*!********************************************!*\\\\
   !*** ./test/integration/fixtures/index.js ***!
   \\\\********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__.e, __webpack_require__, __webpack_require__.* */
 async function run() {
   console.log(await __webpack_require__.e(/*! import() */ \\"test_integration_fixtures_async_js\\").then(__webpack_require__.bind(__webpack_require__, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
 }
@@ -828,7 +828,7 @@ exports[`override the default jsonp script without retry 1`] = `
 /******/ 		// no deferred startup
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add \\"moreModules\\" to the modules object,
 /******/ 			// then flag all \\"chunkIds\\" as loaded and fire callback
@@ -846,7 +846,7 @@ exports[`override the default jsonp script without retry 1`] = `
 /******/ 				}
 /******/ 			}
 /******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			parentChunkLoadingFunction(data);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			while(resolves.length) {
 /******/ 				resolves.shift()();
 /******/ 			}
@@ -854,16 +854,16 @@ exports[`override the default jsonp script without retry 1`] = `
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] || [];
-/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 		
+/******/ 		// no deferred startup
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 /*!********************************************!*\\\\
   !*** ./test/integration/fixtures/index.js ***!
   \\\\********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__.e, __webpack_require__, __webpack_require__.* */
 async function run() {
   console.log(await __webpack_require__.e(/*! import() */ \\"test_integration_fixtures_async_js\\").then(__webpack_require__.bind(__webpack_require__, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
 }
@@ -1130,7 +1130,7 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 		// no deferred startup
 /******/ 		
 /******/ 		// install a JSONP callback for chunk loading
-/******/ 		var webpackJsonpCallback = (data) => {
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
 /******/ 			var [chunkIds, moreModules, runtime] = data;
 /******/ 			// add \\"moreModules\\" to the modules object,
 /******/ 			// then flag all \\"chunkIds\\" as loaded and fire callback
@@ -1148,7 +1148,7 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 				}
 /******/ 			}
 /******/ 			if(runtime) runtime(__webpack_require__);
-/******/ 			parentChunkLoadingFunction(data);
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
 /******/ 			while(resolves.length) {
 /******/ 				resolves.shift()();
 /******/ 			}
@@ -1156,16 +1156,16 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 		}
 /******/ 		
 /******/ 		var chunkLoadingGlobal = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] = self[\\"webpackChunkwebpack_retry_chunk_load_plugin\\"] || [];
-/******/ 		var parentChunkLoadingFunction = chunkLoadingGlobal.push.bind(chunkLoadingGlobal);
-/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback;
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 		
+/******/ 		// no deferred startup
 /******/ 	})();
 /******/ 	
 /************************************************************************/
 /*!********************************************!*\\\\
   !*** ./test/integration/fixtures/index.js ***!
   \\\\********************************************/
-/*! unknown exports (runtime-defined) */
-/*! runtime requirements: __webpack_require__.e, __webpack_require__, __webpack_require__.* */
 async function run() {
   console.log(await __webpack_require__.e(/*! import() */ \\"test_integration_fixtures_async_js\\").then(__webpack_require__.bind(__webpack_require__, /*! ./async */ \\"./test/integration/fixtures/async.js\\")));
 }

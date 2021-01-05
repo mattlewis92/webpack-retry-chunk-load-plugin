@@ -10,17 +10,17 @@
     "webpack": ">=5.0.0"
   },
   "devDependencies": {
-    "codecov": "^3.8.0",
+    "codecov": "^3.8.1",
     "express": "^4.17.1",
-    "html-webpack-plugin": "^4.5.0",
-    "husky": "^4.3.0",
-    "jest": "^26.6.1",
+    "html-webpack-plugin": "^4.5.1",
+    "husky": "^4.3.6",
+    "jest": "^26.6.3",
     "memory-fs": "^0.5.0",
     "nodemon": "^2.0.6",
     "pretty-quick": "^3.1.0",
-    "webpack": "^5.3.1",
-    "webpack-cli": "^4.1.0",
-    "xo": "^0.34.1"
+    "webpack": "^5.11.1",
+    "webpack-cli": "^4.3.1",
+    "xo": "^0.37.1"
   },
   "scripts": {
     "lint": "xo --fix",
@@ -51,7 +51,7 @@
     }
   },
   "dependencies": {
-    "prettier": "^2.1.2"
+    "prettier": "^2.2.1"
   },
   "xo": {
     "prettier": true,

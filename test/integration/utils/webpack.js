@@ -23,9 +23,9 @@ module.exports = function (
   const result = new Promise((resolve, reject) => {
     const compiler = webpack(config);
     compiler.outputFileSystem = fs;
-    compiler.run((err, stats) => {
-      if (err) {
-        return reject(err);
+    compiler.run((error, stats) => {
+      if (error) {
+        return reject(error);
       }
 
       return resolve(stats);
