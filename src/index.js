@@ -68,7 +68,7 @@ class RetryChunkLoadPlugin {
             source +
             prettier.format(script, {
               singleQuote: true,
-              parser: 'babel'
+              parser: 'babel',
             })
           );
         }
