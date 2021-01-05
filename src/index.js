@@ -28,7 +28,7 @@ class RetryChunkLoadPlugin {
         (source, chunk) => {
           const currentChunkName = chunk.name;
           const addRetryCode =
-            this.options.chunks == null ||
+            !this.options.chunks ||
             this.options.chunks.includes(currentChunkName);
           if (!addRetryCode) return source;
           const script = `
@@ -68,7 +68,7 @@ class RetryChunkLoadPlugin {
             source +
             prettier.format(script, {
               singleQuote: true,
-              parser: 'babel',
+              parser: 'babel'
             })
           );
         }
