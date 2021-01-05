@@ -25,7 +25,12 @@ class RetryChunkLoadPlugin {
           : '"cache-bust=true"';
       mainTemplate.hooks.localVars.tap(
         { name: pluginName, stage: 1 },
-        (source) => {
+        (source, chunk) => {
+          const currentChunkName = chunk.name;
+          const addRetryCode =
+            this.options.chunks == null ||
+            this.options.chunks.includes(currentChunkName);
+          if (!addRetryCode) return source;
           const script = `
           var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
           var oldLoadScript = ${RuntimeGlobals.ensureChunk};
