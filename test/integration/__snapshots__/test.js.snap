@@ -172,7 +172,7 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
 /******/ 	  return result.catch(function (error) {
-/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
+/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
 /******/ 	      error.message =
@@ -475,7 +475,7 @@ exports[`override the default jsonp script 1`] = `
 /******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
 /******/ 	  return result.catch(function (error) {
-/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
+/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
 /******/ 	      error.message =
@@ -1046,7 +1046,7 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 	__webpack_require__.e = function (chunkId) {
 /******/ 	  var result = oldLoadScript(chunkId);
 /******/ 	  return result.catch(function (error) {
-/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
+/******/ 	    var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
 /******/ 	    if (retries < 1) {
 /******/ 	      var realSrc = oldGetScript(chunkId);
 /******/ 	      error.message =
