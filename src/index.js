@@ -44,7 +44,7 @@ class RetryChunkLoadPlugin {
           ${RuntimeGlobals.ensureChunk} = function(chunkId){
             var result = oldLoadScript(chunkId);
             return result.catch(function(error){
-              var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 5;
+              var retries = countMap.has(chunkId) ? countMap.get(chunkId) : ${maxRetries};
               if (retries < 1) {
                 var realSrc = oldGetScript(chunkId);
                 error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
