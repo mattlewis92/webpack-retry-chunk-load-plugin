@@ -36,7 +36,6 @@ class RetryChunkLoadPlugin {
           var oldLoadScript = ${RuntimeGlobals.ensureChunk};
           var queryMap = new Map();
           var countMap = new Map();
-          var maxRetries = ${maxRetries};
           ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
             var result = oldGetScript(chunkId);
             return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');

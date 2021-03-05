@@ -164,7 +164,6 @@ exports[`inserts last resort script into the code handling failure after all ret
 /******/ 	var oldLoadScript = __webpack_require__.e;
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
-/******/ 	var maxRetries = 1;
 /******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
@@ -467,7 +466,6 @@ exports[`override the default jsonp script 1`] = `
 /******/ 	var oldLoadScript = __webpack_require__.e;
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
-/******/ 	var maxRetries = 1;
 /******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
@@ -1038,7 +1036,6 @@ exports[`retry loading the main chunk 1`] = `
 /******/ 	var oldLoadScript = __webpack_require__.e;
 /******/ 	var queryMap = new Map();
 /******/ 	var countMap = new Map();
-/******/ 	var maxRetries = 1;
 /******/ 	__webpack_require__.u = function (chunkId) {
 /******/ 	  var result = oldGetScript(chunkId);
 /******/ 	  return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '');
