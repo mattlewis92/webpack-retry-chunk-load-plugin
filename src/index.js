@@ -32,37 +32,39 @@ class RetryChunkLoadPlugin {
             this.options.chunks.includes(currentChunkName);
           if (!addRetryCode) return source;
           const script = `
-          var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
-          var oldLoadScript = ${RuntimeGlobals.ensureChunk};
-          var queryMap = new Map();
-          var countMap = new Map();
-          var maxRetries = ${maxRetries};
-          ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
-            var result = oldGetScript(chunkId);
-            return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
-          };
-          ${RuntimeGlobals.ensureChunk} = function(chunkId){
-            var result = oldLoadScript(chunkId);
-            return result.catch(function(error){
-              var retries = countMap.has(chunkId) ? countMap.get(chunkId) : ${maxRetries};
-              if (retries < 1) {
-                var realSrc = oldGetScript(chunkId);
-                error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
-                error.request = realSrc;${
-                  this.options.lastResortScript
-                    ? this.options.lastResortScript
-                    : ''
+          if(typeof ${RuntimeGlobals.require} !== "undefined") {
+            var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
+            var oldLoadScript = ${RuntimeGlobals.ensureChunk};
+            var queryMap = new Map();
+            var countMap = new Map();
+            var maxRetries = ${maxRetries};
+            ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
+              var result = oldGetScript(chunkId);
+              return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
+            };
+            ${RuntimeGlobals.ensureChunk} = function(chunkId){
+              var result = oldLoadScript(chunkId);
+              return result.catch(function(error){
+                var retries = countMap.has(chunkId) ? countMap.get(chunkId) : ${maxRetries};
+                if (retries < 1) {
+                  var realSrc = oldGetScript(chunkId);
+                  error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
+                  error.request = realSrc;${
+                    this.options.lastResortScript
+                      ? this.options.lastResortScript
+                      : ''
+                  }
+                  throw error;
                 }
-                throw error;
-              }
-              var retryAttempt = ${maxRetries} - retries + 1;
-              var retryAttemptString = '&retry-attempt=' + retryAttempt;
-              var cacheBust = ${getCacheBustString()} + retryAttemptString;
-              queryMap.set(chunkId, cacheBust);
-              countMap.set(chunkId, retries - 1);
-              return ${RuntimeGlobals.ensureChunk}(chunkId);
-            });
-          };
+                var retryAttempt = ${maxRetries} - retries + 1;
+                var retryAttemptString = '&retry-attempt=' + retryAttempt;
+                var cacheBust = ${getCacheBustString()} + retryAttemptString;
+                queryMap.set(chunkId, cacheBust);
+                countMap.set(chunkId, retries - 1);
+                return ${RuntimeGlobals.ensureChunk}(chunkId);
+              });
+            };
+          }
           `;
           return (
             source +
