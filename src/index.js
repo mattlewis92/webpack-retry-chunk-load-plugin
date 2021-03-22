@@ -10,7 +10,7 @@ class RetryChunkLoadPlugin {
 
   apply(compiler) {
     compiler.hooks.thisCompilation.tap(pluginName, (compilation) => {
-      const { mainTemplate } = compilation;
+      const { mainTemplate, runtimeTemplate } = compilation;
       const maxRetryValueFromOptions = Number(this.options.maxRetries);
       const maxRetries =
         Number.isInteger(maxRetryValueFromOptions) &&
@@ -31,13 +31,14 @@ class RetryChunkLoadPlugin {
             !this.options.chunks ||
             this.options.chunks.includes(currentChunkName);
           if (!addRetryCode) return source;
-          const script = `
+          const script = runtimeTemplate.iife(
+            '',
+            `
           if(typeof ${RuntimeGlobals.require} !== "undefined") {
             var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
             var oldLoadScript = ${RuntimeGlobals.ensureChunk};
             var queryMap = new Map();
             var countMap = new Map();
-            var maxRetries = ${maxRetries};
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
               var result = oldGetScript(chunkId);
               return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
@@ -64,11 +65,12 @@ class RetryChunkLoadPlugin {
                 return ${RuntimeGlobals.ensureChunk}(chunkId);
               });
             };
-          }
-          `;
+          }`
+          );
           return (
             source +
             prettier.format(script, {
+              trailingComma: 'es5',
               singleQuote: true,
               parser: 'babel',
             })
