@@ -69,6 +69,7 @@ class RetryChunkLoadPlugin {
           return (
             source +
             prettier.format(script, {
+              trailingComma: 'es5',
               singleQuote: true,
               parser: 'babel',
             })
