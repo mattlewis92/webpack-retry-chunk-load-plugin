@@ -34,11 +34,12 @@ class RetryChunkLoadPlugin {
           const script = runtimeTemplate.iife(
             '',
             `
-          var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
-          var oldLoadScript = ${RuntimeGlobals.ensureChunk};
-          var queryMap = new Map();
-          var countMap = new Map();
-          ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
+          if(typeof ${RuntimeGlobals.require} !== "undefined") {
+            var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
+            var oldLoadScript = ${RuntimeGlobals.ensureChunk};
+            var queryMap = new Map();
+            var countMap = new Map();
+            ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
             var result = oldGetScript(chunkId);
             return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
           };
@@ -64,7 +65,7 @@ class RetryChunkLoadPlugin {
               return ${RuntimeGlobals.ensureChunk}(chunkId);
             });
           };
-          `
+          }`
           );
           return (
             source +
