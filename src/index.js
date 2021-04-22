@@ -57,12 +57,16 @@ class RetryChunkLoadPlugin {
                   }
                   throw error;
                 }
-                var retryAttempt = ${maxRetries} - retries + 1;
-                var retryAttemptString = '&retry-attempt=' + retryAttempt;
-                var cacheBust = ${getCacheBustString()} + retryAttemptString;
-                queryMap.set(chunkId, cacheBust);
-                countMap.set(chunkId, retries - 1);
-                return ${RuntimeGlobals.ensureChunk}(chunkId);
+                return new Promise(function (resolve) {
+                  setTimeout(function () {
+                    var retryAttempt = ${maxRetries} - retries + 1;
+                    var retryAttemptString = '&retry-attempt=' + retryAttempt;
+                    var cacheBust = ${getCacheBustString()} + retryAttemptString;
+                    queryMap.set(chunkId, cacheBust);
+                    countMap.set(chunkId, retries - 1);
+                    resolve(${RuntimeGlobals.ensureChunk}(chunkId));
+                  }, ${this.options.timeout})
+                })
               });
             };
           }`
