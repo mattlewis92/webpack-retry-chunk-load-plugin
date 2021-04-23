@@ -33,6 +33,7 @@ class RetryChunkLoadPlugin {
               : '"cache-bust=true"';
 
           const maxRetryValueFromOptions = Number(this.options.maxRetries);
+          const retryTimeout = Number(this.options.timeout) || 0;
           const maxRetries =
             Number.isInteger(maxRetryValueFromOptions) &&
             maxRetryValueFromOptions > 0
@@ -81,9 +82,11 @@ class RetryChunkLoadPlugin {
                     chunk[1](error);
                     installedChunks[chunkId] = undefined;
                   } else {
-                    var cacheBust = ${getCacheBustString()} + retryAttemptString;
-                    var retryScript = loadScript(jsonpScriptSrc(chunkId) + '?' + cacheBust, (retries-1));
-                    document.head.appendChild(retryScript);
+                    setTimeout(function () {
+                      var cacheBust = ${getCacheBustString()} + retryAttemptString;
+                      var retryScript = loadScript(jsonpScriptSrc(chunkId) + '?' + cacheBust, (retries-1));
+                      document.head.appendChild(retryScript);
+                    }, ${retryTimeout});
                   }
                 } else {
                   installedChunks[chunkId] = undefined;
