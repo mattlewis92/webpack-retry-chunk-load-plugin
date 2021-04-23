@@ -24,6 +24,8 @@ plugins: [
     cacheBust: `function() {
       return Date.now();
     }`,
+    // optional value to set request timeout in milliseconds
+    timeout: 3000,
     // optional value to set the maximum number of retries to load the chunk. Default is 1
     maxRetries: 5,
     // optional list of chunks to which retry script should be injected
@@ -31,17 +33,17 @@ plugins: [
     chunks: ['chunkName'],
     // optional code to be executed in the browser context if after all retries chunk is not loaded.
     // if not set - nothing will happen and error will be returned to the chunk loader.
-    lastResortScript: "window.location.href='/500.html';"
-  })
+    lastResortScript: "window.location.href='/500.html';",
+  }),
 ];
 ```
 
 ### Webpack compatibility
 
-| Webpack version  | webpack-retry-chunk-load-plugin version                                |
-| --------------   | ---------------------------------------------------------------------- |
-| 5.x              | 2.x |
-| 4.x              | 1.x |
+| Webpack version | webpack-retry-chunk-load-plugin version |
+| --------------- | --------------------------------------- |
+| 5.x             | 2.x                                     |
+| 4.x             | 1.x                                     |
 
 ### angular cli
 
