@@ -65,7 +65,7 @@ class RetryChunkLoadPlugin {
                     queryMap.set(chunkId, cacheBust);
                     countMap.set(chunkId, retries - 1);
                     resolve(${RuntimeGlobals.ensureChunk}(chunkId));
-                  }, ${this.options.timeout})
+                  }, ${this.options.retryDelay || this.options.timeout || 0})
                 })
               });
             };
