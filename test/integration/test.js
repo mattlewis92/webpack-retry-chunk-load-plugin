@@ -24,8 +24,8 @@ test('retry loading the main chunk', async () => {
   expect(mainContents).toMatchSnapshot();
 });
 
-test('retry loading the main chunk with timeout', async () => {
-  const { result, fs } = webpack({ chunks: ['main'], timeout: 3000 });
+test('retry loading the main chunk with retryDelay', async () => {
+  const { result, fs } = webpack({ chunks: ['main'], retryDelay: 3000 });
   await result;
   const mainContents = fs.readFileSync(mainOutputFile).toString();
   expect(mainContents).toMatchSnapshot();
