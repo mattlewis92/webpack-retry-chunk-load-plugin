@@ -72,7 +72,7 @@ class RetryChunkLoadPlugin {
           }`
           );
           return (
-            source +
+            source + '\n' +
             prettier.format(script, {
               trailingComma: 'es5',
               singleQuote: true,
