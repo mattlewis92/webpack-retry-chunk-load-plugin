@@ -18,8 +18,8 @@
     "memory-fs": "^0.5.0",
     "nodemon": "^2.0.7",
     "pretty-quick": "^3.1.0",
-    "webpack": "^5.27.2",
-    "webpack-cli": "^4.5.0",
+    "webpack": "^5.64.4",
+    "webpack-cli": "^4.9.1",
     "xo": "^0.38.2"
   },
   "scripts": {
