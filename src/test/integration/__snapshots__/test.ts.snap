@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`given config {"chunks":["main"],"lastResortScript":"window.location.href='/500.html'"}, match snapshot 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/* webpack/runtime/compat */
+/******/ 	(() => {
+/******/ 	  if (typeof __webpack_require__ !== 'undefined') {
+/******/ 	    var oldGetScript = __webpack_require__.u;
+/******/ 	    var oldLoadScript = __webpack_require__.e;
+/******/ 	    var queryMap = new Map();
+/******/ 	    var countMap = new Map();
+/******/ 	    __webpack_require__.u = function (chunkId) {
+/******/ 	      var result = oldGetScript(chunkId);
+/******/ 	      return (
+/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
+/******/ 	      );
+/******/ 	    };
+/******/ 	    __webpack_require__.e = function (chunkId) {
+/******/ 	      var result = oldLoadScript(chunkId);
+/******/ 	      return result.catch(function (error) {
+/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        if (retries < 1) {
+/******/ 	          var realSrc = oldGetScript(chunkId);
+/******/ 	          error.message =
+/******/ 	            'Loading chunk ' +
+/******/ 	            chunkId +
+/******/ 	            ' failed after 1 retries.\\\\n(' +
+/******/ 	            realSrc +
+/******/ 	            ')';
+/******/ 	          error.request = realSrc;
+/******/ 	          window.location.href = '/500.html';
+/******/ 	          throw error;
+/******/ 	        }
+/******/ 	        return new Promise(function (resolve) {
+/******/ 	          setTimeout(function () {
+/******/ 	            var retryAttempt = 1 - retries + 1;
+/******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
+/******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
+/******/ 	            queryMap.set(chunkId, cacheBust);
+/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            resolve(__webpack_require__.e(chunkId));
+/******/ 	          }, 0);
+/******/ 	        });
+/******/ 	      });
+/******/ 	    };
+/******/ 	  }
+/******/ 	})();
+/******/ 	
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	
+/******/ })()
+;"
+`;
+
+exports[`given config {"chunks":["main"],"retryDelay":3000}, match snapshot 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/* webpack/runtime/compat */
+/******/ 	(() => {
+/******/ 	  if (typeof __webpack_require__ !== 'undefined') {
+/******/ 	    var oldGetScript = __webpack_require__.u;
+/******/ 	    var oldLoadScript = __webpack_require__.e;
+/******/ 	    var queryMap = new Map();
+/******/ 	    var countMap = new Map();
+/******/ 	    __webpack_require__.u = function (chunkId) {
+/******/ 	      var result = oldGetScript(chunkId);
+/******/ 	      return (
+/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
+/******/ 	      );
+/******/ 	    };
+/******/ 	    __webpack_require__.e = function (chunkId) {
+/******/ 	      var result = oldLoadScript(chunkId);
+/******/ 	      return result.catch(function (error) {
+/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        if (retries < 1) {
+/******/ 	          var realSrc = oldGetScript(chunkId);
+/******/ 	          error.message =
+/******/ 	            'Loading chunk ' +
+/******/ 	            chunkId +
+/******/ 	            ' failed after 1 retries.\\\\n(' +
+/******/ 	            realSrc +
+/******/ 	            ')';
+/******/ 	          error.request = realSrc;
+/******/ 	          throw error;
+/******/ 	        }
+/******/ 	        return new Promise(function (resolve) {
+/******/ 	          setTimeout(function () {
+/******/ 	            var retryAttempt = 1 - retries + 1;
+/******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
+/******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
+/******/ 	            queryMap.set(chunkId, cacheBust);
+/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            resolve(__webpack_require__.e(chunkId));
+/******/ 	          }, 3000);
+/******/ 	        });
+/******/ 	      });
+/******/ 	    };
+/******/ 	  }
+/******/ 	})();
+/******/ 	
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	
+/******/ })()
+;"
+`;
+
+exports[`given config {"chunks":["main"]}, match snapshot 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/* webpack/runtime/compat */
+/******/ 	(() => {
+/******/ 	  if (typeof __webpack_require__ !== 'undefined') {
+/******/ 	    var oldGetScript = __webpack_require__.u;
+/******/ 	    var oldLoadScript = __webpack_require__.e;
+/******/ 	    var queryMap = new Map();
+/******/ 	    var countMap = new Map();
+/******/ 	    __webpack_require__.u = function (chunkId) {
+/******/ 	      var result = oldGetScript(chunkId);
+/******/ 	      return (
+/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
+/******/ 	      );
+/******/ 	    };
+/******/ 	    __webpack_require__.e = function (chunkId) {
+/******/ 	      var result = oldLoadScript(chunkId);
+/******/ 	      return result.catch(function (error) {
+/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        if (retries < 1) {
+/******/ 	          var realSrc = oldGetScript(chunkId);
+/******/ 	          error.message =
+/******/ 	            'Loading chunk ' +
+/******/ 	            chunkId +
+/******/ 	            ' failed after 1 retries.\\\\n(' +
+/******/ 	            realSrc +
+/******/ 	            ')';
+/******/ 	          error.request = realSrc;
+/******/ 	          throw error;
+/******/ 	        }
+/******/ 	        return new Promise(function (resolve) {
+/******/ 	          setTimeout(function () {
+/******/ 	            var retryAttempt = 1 - retries + 1;
+/******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
+/******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
+/******/ 	            queryMap.set(chunkId, cacheBust);
+/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            resolve(__webpack_require__.e(chunkId));
+/******/ 	          }, 0);
+/******/ 	        });
+/******/ 	      });
+/******/ 	    };
+/******/ 	  }
+/******/ 	})();
+/******/ 	
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	
+/******/ })()
+;"
+`;
+
+exports[`given config {"chunks":[]}, match snapshot 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/************************************************************************/
+/******/ 	
+/******/ 	
+/******/ })()
+;"
+`;
+
+exports[`given config undefined, match snapshot 1`] = `
+"/******/ (() => { // webpackBootstrap
+/******/ 	\\"use strict\\";
+/******/ 	/* webpack/runtime/compat */
+/******/ 	(() => {
+/******/ 	  if (typeof __webpack_require__ !== 'undefined') {
+/******/ 	    var oldGetScript = __webpack_require__.u;
+/******/ 	    var oldLoadScript = __webpack_require__.e;
+/******/ 	    var queryMap = new Map();
+/******/ 	    var countMap = new Map();
+/******/ 	    __webpack_require__.u = function (chunkId) {
+/******/ 	      var result = oldGetScript(chunkId);
+/******/ 	      return (
+/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
+/******/ 	      );
+/******/ 	    };
+/******/ 	    __webpack_require__.e = function (chunkId) {
+/******/ 	      var result = oldLoadScript(chunkId);
+/******/ 	      return result.catch(function (error) {
+/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        if (retries < 1) {
+/******/ 	          var realSrc = oldGetScript(chunkId);
+/******/ 	          error.message =
+/******/ 	            'Loading chunk ' +
+/******/ 	            chunkId +
+/******/ 	            ' failed after 1 retries.\\\\n(' +
+/******/ 	            realSrc +
+/******/ 	            ')';
+/******/ 	          error.request = realSrc;
+/******/ 	          throw error;
+/******/ 	        }
+/******/ 	        return new Promise(function (resolve) {
+/******/ 	          setTimeout(function () {
+/******/ 	            var retryAttempt = 1 - retries + 1;
+/******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
+/******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
+/******/ 	            queryMap.set(chunkId, cacheBust);
+/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            resolve(__webpack_require__.e(chunkId));
+/******/ 	          }, 0);
+/******/ 	        });
+/******/ 	      });
+/******/ 	    };
+/******/ 	  }
+/******/ 	})();
+/******/ 	
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	
+/******/ })()
+;"
+`;
