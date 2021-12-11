@@ -1,5 +1,5 @@
 import * as path from 'path';
-import { RetryChunkLoadPluginOptions } from '../..';
+import { RetryChunkLoadPluginOptions } from '../../src';
 import webpack from './utils/webpack';
 
 const mainOutputFile = path.join(__dirname, 'fixtures', 'dist', 'main.js');

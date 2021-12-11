@@ -1,6 +1,6 @@
 import * as path from 'path';
 import type { Configuration } from 'webpack';
-import { RetryChunkLoadPlugin } from '../../';
+import { RetryChunkLoadPlugin } from '../../src';
 import HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {

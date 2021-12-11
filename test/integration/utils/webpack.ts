@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as webpack from 'webpack';
-import { RetryChunkLoadPlugin } from '../../../';
+import { RetryChunkLoadPlugin } from '../../../src';
 import MemoryFileSystem = require('memory-fs');
 
 export default function (

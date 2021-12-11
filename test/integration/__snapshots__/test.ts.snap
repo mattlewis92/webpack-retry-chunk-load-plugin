@@ -5,10 +5,10 @@ exports[`given config {"chunks":["main"],"lastResortScript":"window.location.hre
 /******/ 	\\"use strict\\";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ \\"./src/test/integration/fixtures/async.ts\\":
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/async.ts ***!
-  \\\\************************************************/
+/***/ \\"./test/integration/fixtures/async.ts\\":
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/async.ts ***!
+  \\\\********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -96,12 +96,12 @@ console.log('foo loaded!');
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/index.ts ***!
-  \\\\************************************************/
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/index.ts ***!
+  \\\\********************************************/
 
 async function run() {
-    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./src/test/integration/fixtures/async.ts\\")));
+    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./test/integration/fixtures/async.ts\\")));
 }
 run();
 
@@ -116,10 +116,10 @@ exports[`given config {"chunks":["main"],"retryDelay":3000}, match snapshot 1`] 
 /******/ 	\\"use strict\\";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ \\"./src/test/integration/fixtures/async.ts\\":
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/async.ts ***!
-  \\\\************************************************/
+/***/ \\"./test/integration/fixtures/async.ts\\":
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/async.ts ***!
+  \\\\********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -206,12 +206,12 @@ console.log('foo loaded!');
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/index.ts ***!
-  \\\\************************************************/
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/index.ts ***!
+  \\\\********************************************/
 
 async function run() {
-    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./src/test/integration/fixtures/async.ts\\")));
+    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./test/integration/fixtures/async.ts\\")));
 }
 run();
 
@@ -226,10 +226,10 @@ exports[`given config {"chunks":["main"]}, match snapshot 1`] = `
 /******/ 	\\"use strict\\";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ \\"./src/test/integration/fixtures/async.ts\\":
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/async.ts ***!
-  \\\\************************************************/
+/***/ \\"./test/integration/fixtures/async.ts\\":
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/async.ts ***!
+  \\\\********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -316,12 +316,12 @@ console.log('foo loaded!');
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/index.ts ***!
-  \\\\************************************************/
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/index.ts ***!
+  \\\\********************************************/
 
 async function run() {
-    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./src/test/integration/fixtures/async.ts\\")));
+    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./test/integration/fixtures/async.ts\\")));
 }
 run();
 
@@ -336,10 +336,10 @@ exports[`given config {"chunks":[]}, match snapshot 1`] = `
 /******/ 	\\"use strict\\";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ \\"./src/test/integration/fixtures/async.ts\\":
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/async.ts ***!
-  \\\\************************************************/
+/***/ \\"./test/integration/fixtures/async.ts\\":
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/async.ts ***!
+  \\\\********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -382,12 +382,12 @@ console.log('foo loaded!');
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/index.ts ***!
-  \\\\************************************************/
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/index.ts ***!
+  \\\\********************************************/
 
 async function run() {
-    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./src/test/integration/fixtures/async.ts\\")));
+    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./test/integration/fixtures/async.ts\\")));
 }
 run();
 
@@ -402,10 +402,10 @@ exports[`given config undefined, match snapshot 1`] = `
 /******/ 	\\"use strict\\";
 /******/ 	var __webpack_modules__ = ({
 
-/***/ \\"./src/test/integration/fixtures/async.ts\\":
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/async.ts ***!
-  \\\\************************************************/
+/***/ \\"./test/integration/fixtures/async.ts\\":
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/async.ts ***!
+  \\\\********************************************/
 /***/ ((__unused_webpack_module, exports) => {
 
 
@@ -492,12 +492,12 @@ console.log('foo loaded!');
 var __webpack_exports__ = {};
 // This entry need to be wrapped in an IIFE because it need to be isolated against other modules in the chunk.
 (() => {
-/*!************************************************!*\\\\
-  !*** ./src/test/integration/fixtures/index.ts ***!
-  \\\\************************************************/
+/*!********************************************!*\\\\
+  !*** ./test/integration/fixtures/index.ts ***!
+  \\\\********************************************/
 
 async function run() {
-    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./src/test/integration/fixtures/async.ts\\")));
+    console.log(await Promise.resolve().then(() => __webpack_require__(/*! ./async */ \\"./test/integration/fixtures/async.ts\\")));
 }
 run();
 

@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "directories": {
-    "test": "src/test"
+    "test": "test"
   },
   "peerDependencies": {
     "webpack": ">=5.0.0"
@@ -38,11 +38,11 @@
     "test:watch": "npm t -- --watch",
     "test:ci": "npm t -- --runInBand --coverage",
     "codecov": "cat coverage/lcov.info | codecov",
-    "test:e2e": "webpack --config src/test/e2e/webpack.config.ts && nodemon src/test/e2e/server.ts",
+    "test:e2e": "webpack --config test/e2e/webpack.config.ts && nodemon test/e2e/server.ts",
     "ci": "npm run lint && npm run test:ci",
     "prepare": "npm run compile",
     "clean": "gts clean",
-    "compile": "tsc",
+    "compile": "tsc -p tsconfig.build.json",
     "fix": "gts fix",
     "pretest": "npm run compile",
     "posttest": "npm run lint"
