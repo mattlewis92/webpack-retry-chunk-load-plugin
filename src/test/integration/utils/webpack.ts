@@ -5,7 +5,7 @@ import MemoryFileSystem = require('memory-fs');
 
 export default function (
   pluginOptions = {},
-  { fixture = 'index.js', extend = {} } = {}
+  { fixture = 'index.ts', extend = {} } = {}
 ) {
   const fs = new MemoryFileSystem();
 
@@ -20,6 +20,12 @@ export default function (
         path: path.join(fixturesDir, 'dist'),
       },
       plugins: [new RetryChunkLoadPlugin(pluginOptions)],
+      resolve: {
+        extensions: ['.ts', '.js'],
+      },
+      module: {
+        rules: [{ test: /\.ts?$/, loader: 'ts-loader' }],
+      },
       ...extend,
     });
 
