@@ -1,10 +1,10 @@
-const path = require('path');
-const express = require('express');
+import * as path from 'path';
+import * as express from 'express';
 
 const app = express();
 const port = 3000;
 
-app.get('/test_integration_fixtures_async_js.js', (request, response, next) => {
+app.get('/test_integration_fixtures_async_ts.js', (request, response, next) => {
   if (
     request.query['cache-bust'] === 'true' &&
     request.query['retry-attempt'] === '5'
