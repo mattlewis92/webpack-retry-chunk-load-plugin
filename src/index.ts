@@ -27,10 +27,6 @@ export interface RetryChunkLoadPluginOptions {
    * optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
    */
   retryDelay?: number;
-  /**
-   * @deprecated - please use `retryDelay` instead
-   */
-  timeout?: number;
 }
 
 export class RetryChunkLoadPlugin {
@@ -97,7 +93,7 @@ export class RetryChunkLoadPlugin {
                     queryMap.set(chunkId, cacheBust);
                     countMap.set(chunkId, retries - 1);
                     resolve(${RuntimeGlobals.ensureChunk}(chunkId));
-                  }, ${this.options.retryDelay || this.options.timeout || 0})
+                  }, ${this.options.retryDelay || 0})
                 })
               });
             };
