@@ -11,6 +11,10 @@ const cases: (RetryChunkLoadPluginOptions | undefined)[] = [
   { chunks: ['main'], retryDelay: 3000 },
   {
     chunks: ['main'],
+    retryDelay: 'function(retryAttempt) { return retryAttempt * 1000 }',
+  },
+  {
+    chunks: ['main'],
     lastResortScript: "window.location.href='/500.html'",
   },
 ];

@@ -24,9 +24,11 @@ export interface RetryChunkLoadPluginOptions {
    */
   maxRetries?: number;
   /**
-   * optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
+   * optional number value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
+   * if string, value must be code to generate a delay value. Receives retryCount as argument
+   * e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
    */
-  retryDelay?: number;
+  retryDelay?: number | string;
 }
 
 export class RetryChunkLoadPlugin {
@@ -58,6 +60,12 @@ export class RetryChunkLoadPlugin {
           const addRetryCode =
             !this.options.chunks ||
             this.options.chunks.includes(currentChunkName);
+
+          const getRetryDelay =
+            typeof this.options.retryDelay === 'string'
+              ? this.options.retryDelay
+              : `function() { return ${this.options.retryDelay || 0} }`;
+
           if (!addRetryCode) return source;
           const script = runtimeTemplate.iife(
             '',
@@ -67,6 +75,7 @@ export class RetryChunkLoadPlugin {
             var oldLoadScript = ${RuntimeGlobals.ensureChunk};
             var queryMap = new Map();
             var countMap = new Map();
+            var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
               var result = oldGetScript(chunkId);
               return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
@@ -86,14 +95,14 @@ export class RetryChunkLoadPlugin {
                   throw error;
                 }
                 return new Promise(function (resolve) {
+                  var retryAttempt = ${maxRetries} - retries + 1;
                   setTimeout(function () {
-                    var retryAttempt = ${maxRetries} - retries + 1;
                     var retryAttemptString = '&retry-attempt=' + retryAttempt;
                     var cacheBust = ${getCacheBustString()} + retryAttemptString;
                     queryMap.set(chunkId, cacheBust);
                     countMap.set(chunkId, retries - 1);
                     resolve(${RuntimeGlobals.ensureChunk}(chunkId));
-                  }, ${this.options.retryDelay || 0})
+                  }, getRetryDelay(retryAttempt))
                 })
               });
             };

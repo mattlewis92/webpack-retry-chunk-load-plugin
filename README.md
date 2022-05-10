@@ -25,6 +25,8 @@ plugins: [
       return Date.now();
     }`,
     // optional value to set the amount of time in milliseconds before trying to load the chunk again. Default is 0
+    // if string, value must be code to generate a delay value. Receives retryCount as argument 
+    // e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
     retryDelay: 3000,
     // optional value to set the maximum number of retries to load the chunk. Default is 1
     maxRetries: 5,
