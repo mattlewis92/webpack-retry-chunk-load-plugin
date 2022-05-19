@@ -52,21 +52,19 @@ console.log('foo loaded!');
 /******/ 	  if (typeof __webpack_require__ !== 'undefined') {
 /******/ 	    var oldGetScript = __webpack_require__.u;
 /******/ 	    var oldLoadScript = __webpack_require__.e;
-/******/ 	    var queryMap = new Map();
-/******/ 	    var countMap = new Map();
+/******/ 	    var queryMap = {};
+/******/ 	    var countMap = {};
 /******/ 	    var getRetryDelay = function () {
 /******/ 	      return 0;
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return (
-/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
-/******/ 	      );
+/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
 /******/ 	      return result.catch(function (error) {
-/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : 1;
 /******/ 	        if (retries < 1) {
 /******/ 	          var realSrc = oldGetScript(chunkId);
 /******/ 	          error.message =
@@ -84,8 +82,8 @@ console.log('foo loaded!');
 /******/ 	          setTimeout(function () {
 /******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
-/******/ 	            queryMap.set(chunkId, cacheBust);
-/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            queryMap[chunkId] = cacheBust;
+/******/ 	            countMap[chunkId] = retries - 1;
 /******/ 	            resolve(__webpack_require__.e(chunkId));
 /******/ 	          }, getRetryDelay(retryAttempt));
 /******/ 	        });
@@ -166,21 +164,19 @@ console.log('foo loaded!');
 /******/ 	  if (typeof __webpack_require__ !== 'undefined') {
 /******/ 	    var oldGetScript = __webpack_require__.u;
 /******/ 	    var oldLoadScript = __webpack_require__.e;
-/******/ 	    var queryMap = new Map();
-/******/ 	    var countMap = new Map();
+/******/ 	    var queryMap = {};
+/******/ 	    var countMap = {};
 /******/ 	    var getRetryDelay = function (retryAttempt) {
 /******/ 	      return retryAttempt * 1000;
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return (
-/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
-/******/ 	      );
+/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
 /******/ 	      return result.catch(function (error) {
-/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : 1;
 /******/ 	        if (retries < 1) {
 /******/ 	          var realSrc = oldGetScript(chunkId);
 /******/ 	          error.message =
@@ -197,8 +193,8 @@ console.log('foo loaded!');
 /******/ 	          setTimeout(function () {
 /******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
-/******/ 	            queryMap.set(chunkId, cacheBust);
-/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            queryMap[chunkId] = cacheBust;
+/******/ 	            countMap[chunkId] = retries - 1;
 /******/ 	            resolve(__webpack_require__.e(chunkId));
 /******/ 	          }, getRetryDelay(retryAttempt));
 /******/ 	        });
@@ -279,21 +275,19 @@ console.log('foo loaded!');
 /******/ 	  if (typeof __webpack_require__ !== 'undefined') {
 /******/ 	    var oldGetScript = __webpack_require__.u;
 /******/ 	    var oldLoadScript = __webpack_require__.e;
-/******/ 	    var queryMap = new Map();
-/******/ 	    var countMap = new Map();
+/******/ 	    var queryMap = {};
+/******/ 	    var countMap = {};
 /******/ 	    var getRetryDelay = function () {
 /******/ 	      return 3000;
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return (
-/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
-/******/ 	      );
+/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
 /******/ 	      return result.catch(function (error) {
-/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : 1;
 /******/ 	        if (retries < 1) {
 /******/ 	          var realSrc = oldGetScript(chunkId);
 /******/ 	          error.message =
@@ -310,8 +304,8 @@ console.log('foo loaded!');
 /******/ 	          setTimeout(function () {
 /******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
-/******/ 	            queryMap.set(chunkId, cacheBust);
-/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            queryMap[chunkId] = cacheBust;
+/******/ 	            countMap[chunkId] = retries - 1;
 /******/ 	            resolve(__webpack_require__.e(chunkId));
 /******/ 	          }, getRetryDelay(retryAttempt));
 /******/ 	        });
@@ -392,21 +386,19 @@ console.log('foo loaded!');
 /******/ 	  if (typeof __webpack_require__ !== 'undefined') {
 /******/ 	    var oldGetScript = __webpack_require__.u;
 /******/ 	    var oldLoadScript = __webpack_require__.e;
-/******/ 	    var queryMap = new Map();
-/******/ 	    var countMap = new Map();
+/******/ 	    var queryMap = {};
+/******/ 	    var countMap = {};
 /******/ 	    var getRetryDelay = function () {
 /******/ 	      return 0;
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return (
-/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
-/******/ 	      );
+/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
 /******/ 	      return result.catch(function (error) {
-/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : 1;
 /******/ 	        if (retries < 1) {
 /******/ 	          var realSrc = oldGetScript(chunkId);
 /******/ 	          error.message =
@@ -423,8 +415,8 @@ console.log('foo loaded!');
 /******/ 	          setTimeout(function () {
 /******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
-/******/ 	            queryMap.set(chunkId, cacheBust);
-/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            queryMap[chunkId] = cacheBust;
+/******/ 	            countMap[chunkId] = retries - 1;
 /******/ 	            resolve(__webpack_require__.e(chunkId));
 /******/ 	          }, getRetryDelay(retryAttempt));
 /******/ 	        });
@@ -571,21 +563,19 @@ console.log('foo loaded!');
 /******/ 	  if (typeof __webpack_require__ !== 'undefined') {
 /******/ 	    var oldGetScript = __webpack_require__.u;
 /******/ 	    var oldLoadScript = __webpack_require__.e;
-/******/ 	    var queryMap = new Map();
-/******/ 	    var countMap = new Map();
+/******/ 	    var queryMap = {};
+/******/ 	    var countMap = {};
 /******/ 	    var getRetryDelay = function () {
 /******/ 	      return 0;
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return (
-/******/ 	        result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId) : '')
-/******/ 	      );
+/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
 /******/ 	      return result.catch(function (error) {
-/******/ 	        var retries = countMap.has(chunkId) ? countMap.get(chunkId) : 1;
+/******/ 	        var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : 1;
 /******/ 	        if (retries < 1) {
 /******/ 	          var realSrc = oldGetScript(chunkId);
 /******/ 	          error.message =
@@ -602,8 +592,8 @@ console.log('foo loaded!');
 /******/ 	          setTimeout(function () {
 /******/ 	            var retryAttemptString = '&retry-attempt=' + retryAttempt;
 /******/ 	            var cacheBust = 'cache-bust=true' + retryAttemptString;
-/******/ 	            queryMap.set(chunkId, cacheBust);
-/******/ 	            countMap.set(chunkId, retries - 1);
+/******/ 	            queryMap[chunkId] = cacheBust;
+/******/ 	            countMap[chunkId] = retries - 1;
 /******/ 	            resolve(__webpack_require__.e(chunkId));
 /******/ 	          }, getRetryDelay(retryAttempt));
 /******/ 	        });
