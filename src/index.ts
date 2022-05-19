@@ -78,7 +78,7 @@ export class RetryChunkLoadPlugin {
             var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
               var result = oldGetScript(chunkId);
-              return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId]  : '');
+              return result + (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId]  : '');
             };
             ${RuntimeGlobals.ensureChunk} = function(chunkId){
               var result = oldLoadScript(chunkId);

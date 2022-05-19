@@ -59,7 +59,10 @@ console.log('foo loaded!');
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
+/******/ 	      return (
+/******/ 	        result +
+/******/ 	        (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId] : '')
+/******/ 	      );
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
@@ -171,7 +174,10 @@ console.log('foo loaded!');
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
+/******/ 	      return (
+/******/ 	        result +
+/******/ 	        (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId] : '')
+/******/ 	      );
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
@@ -282,7 +288,10 @@ console.log('foo loaded!');
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
+/******/ 	      return (
+/******/ 	        result +
+/******/ 	        (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId] : '')
+/******/ 	      );
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
@@ -393,7 +402,10 @@ console.log('foo loaded!');
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
+/******/ 	      return (
+/******/ 	        result +
+/******/ 	        (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId] : '')
+/******/ 	      );
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
@@ -570,7 +582,10 @@ console.log('foo loaded!');
 /******/ 	    };
 /******/ 	    __webpack_require__.u = function (chunkId) {
 /******/ 	      var result = oldGetScript(chunkId);
-/******/ 	      return result + (!!queryMap[chunkId] ? '?' + queryMap[chunkId] : '');
+/******/ 	      return (
+/******/ 	        result +
+/******/ 	        (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId] : '')
+/******/ 	      );
 /******/ 	    };
 /******/ 	    __webpack_require__.e = function (chunkId) {
 /******/ 	      var result = oldLoadScript(chunkId);
