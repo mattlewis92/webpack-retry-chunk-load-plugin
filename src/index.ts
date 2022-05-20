@@ -78,12 +78,12 @@ export class RetryChunkLoadPlugin {
             var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
               var result = oldGetScript(chunkId);
-              return result + (queryMap[chunkId] !== undefined ? '?' + queryMap[chunkId]  : '');
+              return result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : '');
             };
             ${RuntimeGlobals.ensureChunk} = function(chunkId){
               var result = oldLoadScript(chunkId);
               return result.catch(function(error){
-                var retries = countMap[chunkId] !== undefined ? countMap[chunkId] : ${maxRetries};
+                var retries = countMap.hasOwnProperty(chunkId) ? countMap[chunkId] : ${maxRetries};
                 if (retries < 1) {
                   var realSrc = oldGetScript(chunkId);
                   error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
