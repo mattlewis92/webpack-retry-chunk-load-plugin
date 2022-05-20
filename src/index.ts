@@ -73,17 +73,17 @@ export class RetryChunkLoadPlugin {
           if(typeof ${RuntimeGlobals.require} !== "undefined") {
             var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
             var oldLoadScript = ${RuntimeGlobals.ensureChunk};
-            var queryMap = new Map();
-            var countMap = new Map();
+            var queryMap = {};
+            var countMap = {};
             var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
               var result = oldGetScript(chunkId);
-              return result + (queryMap.has(chunkId) ? '?' + queryMap.get(chunkId)  : '');
+              return result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : '');
             };
             ${RuntimeGlobals.ensureChunk} = function(chunkId){
               var result = oldLoadScript(chunkId);
               return result.catch(function(error){
-                var retries = countMap.has(chunkId) ? countMap.get(chunkId) : ${maxRetries};
+                var retries = countMap.hasOwnProperty(chunkId) ? countMap[chunkId] : ${maxRetries};
                 if (retries < 1) {
                   var realSrc = oldGetScript(chunkId);
                   error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
@@ -99,8 +99,8 @@ export class RetryChunkLoadPlugin {
                   setTimeout(function () {
                     var retryAttemptString = '&retry-attempt=' + retryAttempt;
                     var cacheBust = ${getCacheBustString()} + retryAttemptString;
-                    queryMap.set(chunkId, cacheBust);
-                    countMap.set(chunkId, retries - 1);
+                    queryMap[chunkId] = cacheBust;
+                    countMap[chunkId] = retries - 1;
                     resolve(${RuntimeGlobals.ensureChunk}(chunkId));
                   }, getRetryDelay(retryAttempt))
                 })
