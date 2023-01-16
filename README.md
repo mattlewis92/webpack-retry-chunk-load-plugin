@@ -38,7 +38,7 @@ plugins: [
     lastResortScript: "window.location.href='/500.html';",
     // optional value to be executed in the browser context if after all retries chunk is not loaded.
     // if set - error will be returned to the chunk loader with url which tried.
-    allTriedUrl: false,
+    allLogUrl: false,
   }),
 ];
 ```
