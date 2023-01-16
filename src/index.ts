@@ -29,6 +29,12 @@ export interface RetryChunkLoadPluginOptions {
    * e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
    */
   retryDelay?: number | string;
+  /**
+   * optional boolean value to set the error log with retired all the url. Default is false
+   * if string, value must be code to generate a delay value. Receives retryCount as argument
+   * e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
+   */
+  allTriedUrl?: boolean;
 }
 
 export class RetryChunkLoadPlugin {
@@ -42,6 +48,7 @@ export class RetryChunkLoadPlugin {
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
       const { mainTemplate, runtimeTemplate } = compilation;
       const maxRetryValueFromOptions = Number(this.options.maxRetries);
+      var allChunkRequest=[];
       const maxRetries =
         Number.isInteger(maxRetryValueFromOptions) &&
         maxRetryValueFromOptions > 0
@@ -77,7 +84,9 @@ export class RetryChunkLoadPlugin {
             var countMap = {};
             var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
+              
               var result = oldGetScript(chunkId);
+              allChunkRequest.push(result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : ''))
               return result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : '');
             };
             ${RuntimeGlobals.ensureChunk} = function(chunkId){
@@ -86,7 +95,11 @@ export class RetryChunkLoadPlugin {
                 var retries = countMap.hasOwnProperty(chunkId) ? countMap[chunkId] : ${maxRetries};
                 if (retries < 1) {
                   var realSrc = oldGetScript(chunkId);
+                  if(this.options.allTriedUrl){
+                  error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries,all tried url:'+ allChunkRequest.join(';')+'\\n(' + realSrc + ')';
+                  }else{
                   error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
+                  }
                   error.request = realSrc;${
                     this.options.lastResortScript
                       ? this.options.lastResortScript
