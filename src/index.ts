@@ -30,9 +30,8 @@ export interface RetryChunkLoadPluginOptions {
    */
   retryDelay?: number | string;
   /**
-   * optional boolean value to set the error log with retired all the url. Default is false
-   * if string, value must be code to generate a delay value. Receives retryCount as argument
-   * e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
+   * optional value to be executed in the browser context if after all retries chunk is not Loaded.
+   * if set - error will be returned to the chunk loader with url which tried.
    */
   allLogUrl?: boolean;
 }
