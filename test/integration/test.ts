@@ -9,9 +9,12 @@ const cases: (RetryChunkLoadPluginOptions | undefined)[] = [
   { chunks: [] },
   { chunks: ['main'] },
   { chunks: ['main'], retryDelay: 3000 },
+
+  { chunks: ['main'] },
   {
     chunks: ['main'],
     retryDelay: 'function(retryAttempt) { return retryAttempt * 1000 }',
+    allLogUrl: true,
   },
   {
     chunks: ['main'],

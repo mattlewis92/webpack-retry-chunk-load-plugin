@@ -29,6 +29,11 @@ export interface RetryChunkLoadPluginOptions {
    * e.g. `function(retryAttempt) { return retryAttempt * 1000 }`
    */
   retryDelay?: number | string;
+  /**
+   * optional value to be executed in the browser context if after all retries chunk is not Loaded.
+   * if set - error will be returned to the chunk loader with url which tried.
+   */
+  allLogUrl?: boolean;
 }
 
 export class RetryChunkLoadPlugin {
@@ -42,6 +47,7 @@ export class RetryChunkLoadPlugin {
     compiler.hooks.thisCompilation.tap(pluginName, compilation => {
       const { mainTemplate, runtimeTemplate } = compilation;
       const maxRetryValueFromOptions = Number(this.options.maxRetries);
+      const isAllLogUrl = this.options.allLogUrl;
       const maxRetries =
         Number.isInteger(maxRetryValueFromOptions) &&
         maxRetryValueFromOptions > 0
@@ -71,14 +77,20 @@ export class RetryChunkLoadPlugin {
             '',
             `
           if(typeof ${RuntimeGlobals.require} !== "undefined") {
+            var allChunkRequest = [];
             var oldGetScript = ${RuntimeGlobals.getChunkScriptFilename};
             var oldLoadScript = ${RuntimeGlobals.ensureChunk};
             var queryMap = {};
             var countMap = {};
             var getRetryDelay = ${getRetryDelay}
             ${RuntimeGlobals.getChunkScriptFilename} = function(chunkId){
+              
               var result = oldGetScript(chunkId);
-              return result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : '');
+              var urlWithQueryParameter = result + (queryMap.hasOwnProperty(chunkId) ? '?' + queryMap[chunkId]  : '');
+              if(${isAllLogUrl}){
+                allChunkRequest.push(urlWithQueryParameter)
+              }
+              return urlWithQueryParameter;
             };
             ${RuntimeGlobals.ensureChunk} = function(chunkId){
               var result = oldLoadScript(chunkId);
@@ -86,7 +98,11 @@ export class RetryChunkLoadPlugin {
                 var retries = countMap.hasOwnProperty(chunkId) ? countMap[chunkId] : ${maxRetries};
                 if (retries < 1) {
                   var realSrc = oldGetScript(chunkId);
+                  if(${isAllLogUrl}){
+                  error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.All tried url:'+ allChunkRequest.join(';')+'\\n(' + realSrc + ')';
+                  }else{
                   error.message = 'Loading chunk ' + chunkId + ' failed after ${maxRetries} retries.\\n(' + realSrc + ')';
+                  }
                   error.request = realSrc;${
                     this.options.lastResortScript
                       ? this.options.lastResortScript
